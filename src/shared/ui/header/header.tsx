@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Home, User, Settings, MessageCircle } from "lucide-react";
+import { Menu, X, Home, User, MessageCircle } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -16,7 +16,6 @@ const Header = () => {
   const navigationItems = [
     { name: t("home"), href: "/", icon: Home },
     { name: t("about"), href: "/about", icon: User },
-    { name: t("services"), href: "/services", icon: Settings },
     { name: t("contact"), href: "/contact", icon: MessageCircle },
   ];
 
@@ -70,15 +69,11 @@ const Header = () => {
             {/* CTA Buttons */}
             <div className="flex items-center space-x-4">
               <LanguageSwitcher variant="desktop" />
-              <Button
-                variant="outline"
-                className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-colors duration-200"
-              >
-                {t("consultation")}
-              </Button>
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white transition-colors duration-200">
-                {t("contactUs")}
-              </Button>
+              <Link href={"/contact"}>
+                <Button className="bg-orange-500 hover:bg-orange-600 text-white transition-colors duration-200">
+                  {t("contactUs")}
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -136,15 +131,12 @@ const Header = () => {
                 ))}
                 <div className="pt-4 space-y-2 px-3">
                   <LanguageSwitcher variant="mobile" />
-                  <Button
-                    variant="outline"
-                    className="w-full border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
-                  >
-                    {t("consultation")}
-                  </Button>
-                  <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white">
-                    {t("contactUs")}
-                  </Button>
+
+                  <Link href={"/contact"}>
+                    <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white">
+                      {t("contactUs")}
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -154,7 +146,7 @@ const Header = () => {
 
       {/* Mobile Bottom Navigation */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
-        <div className="grid grid-cols-4 h-16">
+        <div className="grid grid-cols-3 h-16">
           {navigationItems.map((item, index) => {
             const Icon = item.icon;
             return (
